@@ -39,8 +39,9 @@ struct SneakerRotateView: View {
         generateVideoUrl(complete: { (fileURL:URL) in
             self.saveVideo(url: fileURL, complete: {saved in
                 print("animation video save complete")
-                print(saved)
-                RestAPI.UploadVideo()
+                print("Saved: \(saved)")
+                print("FileURL: \(fileURL)")
+                RestAPI.UploadVideo(fileURL:fileURL, prevImage:self.shots[0])
             })
         })
 
@@ -151,8 +152,10 @@ struct Controls: View {
                 Button(action: {
                     //print(self.duration)
                     self.save()
+                    self.showPreview = false
+                    self.close()
                 }) {
-                    Text("Save")
+                    Text("Post")
                 }.padding()
             }
             Spacer()

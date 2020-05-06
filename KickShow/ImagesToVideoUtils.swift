@@ -17,22 +17,18 @@ typealias CXEMovieMakerUIImageExtractor = (AnyObject) -> UIImage?
 public class ImagesToVideoUtils: NSObject {
 
     static let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-    static let tempPath = paths[0] + "/exportvideo.mp4"
+    static let tempPath = paths[0] + "/" + UUID().uuidString + ".mp4"
     static let fileURL = URL(fileURLWithPath: tempPath)
-    //static let tempPath = NSTemporaryDirectory() + "/exprotvideo.mp4"
-    //static let fileURL = URL(fileURLWithPath: tempPath)
-
 
     var assetWriter:AVAssetWriter!
     var writeInput:AVAssetWriterInput!
     var bufferAdapter:AVAssetWriterInputPixelBufferAdaptor!
     var videoSettings:[String : Any]!
     var frameTime:CMTime!
-    //var fileURL:URL!
+    var fileURL2:URL!
 
     var completionBlock: CXEMovieMakerCompletion?
     var movieMakerUIImageExtractor:CXEMovieMakerUIImageExtractor?
-
 
     public class func videoSettings(codec:String, width:Int, height:Int) -> [String: Any]{
         if(Int(width) % 16 != 0){
@@ -56,7 +52,8 @@ public class ImagesToVideoUtils: NSObject {
             }
         }
 
-        self.assetWriter = try! AVAssetWriter(url: ImagesToVideoUtils.fileURL, fileType: AVFileType.mov)
+        self.fileURL2 = URL(fileURLWithPath: ImagesToVideoUtils.paths[0] + "/" + UUID().uuidString + ".mp4")
+        self.assetWriter = try! AVAssetWriter(url: fileURL2, fileType: AVFileType.mov)
 
         self.videoSettings = videoSettings
         self.writeInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: videoSettings)
@@ -66,6 +63,7 @@ public class ImagesToVideoUtils: NSObject {
         let bufferAttributes:[String: Any] = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32ARGB)]
         self.bufferAdapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: self.writeInput, sourcePixelBufferAttributes: bufferAttributes)
         self.frameTime = CMTimeMake(value: 1, timescale: 5)
+        
     }
 
     func createMovieFrom(urls: [URL], withCompletion: @escaping CXEMovieMakerCompletion){
@@ -121,7 +119,7 @@ public class ImagesToVideoUtils: NSObject {
             self.writeInput.markAsFinished()
             self.assetWriter.finishWriting {
                 DispatchQueue.main.sync {
-                    self.completionBlock!(ImagesToVideoUtils.fileURL)
+                    self.completionBlock!(self.fileURL2)
                 }
             }
         }
@@ -143,8 +141,6 @@ public class ImagesToVideoUtils: NSObject {
         assert(context != nil, "context is nil")
 
         context!.concatenate(CGAffineTransform.identity)
-        // rotating
-        // rotating
         context!.draw(cgImage, in: CGRect(x: 0, y: 0, width: cgImage.width, height: cgImage.height))
         CVPixelBufferUnlockBaseAddress(pxbuffer!, CVPixelBufferLockFlags(rawValue: 0))
         return pxbuffer
