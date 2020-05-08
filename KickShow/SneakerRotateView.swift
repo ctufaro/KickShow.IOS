@@ -38,35 +38,25 @@ struct SneakerRotateView: View {
     func saveAsVideo() {
         generateVideoUrl(complete: { (fileURL:URL) in
             self.saveVideo(url: fileURL, complete: {saved in
+                let imageUrl = self.saveImage(image: self.shots[0])
                 print("animation video save complete")
                 print("Saved: \(saved)")
                 print("FileURL: \(fileURL)")
-                RestAPI.UploadVideo(fileURL:fileURL, prevImage:self.shots[0])
+                RestAPI.UploadVideo(fileURL:fileURL, imageUrl: imageUrl!)
             })
         })
-
-        /*let options = NWImageSequencerOptions(outputSize: CGSize(width: shots[0].size.width,height: shots[0].size.height), secondsPerImage: 2.5)
-
-        NWImageSequencer.createLocalMovieWithImages(images: self.shots, options: options,
-                    onSuccess: { (movieUrl) -> Void in
-                        print("movie successfully created at \(movieUrl)")
-                        NWImageSequencer.saveMovieAtUrl(url: movieUrl, toAlbumNamed: "Example",
-                            onSaveSuccess: { (asset) -> Void in
-                                 print("Sucessfully saved video asset: \(asset)")
-                            },
-                            onError: { (error) -> Void in
-                                 print("Error saving video: \(error)")
-                            })
-                    },
-                    onError: { (error) -> Void in
-                        print("error occured creating movie \(error)")
-                    },
-                    onProgress: { (progress) -> Void in
-                        print("progress creating movie reported at \(progress)")
-                    })
-         */
     }
     
+    func saveImage(image: UIImage) -> URL? {
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!;
+        let fileURL = documentsUrl.appendingPathComponent(UUID().uuidString+".jpg")
+        if let imageData = image.jpegData(compressionQuality: 0.5) {
+            try? imageData.write(to: fileURL, options: .atomic)
+            return fileURL
+        }
+        return nil
+    }
+
     func generateVideoUrl(complete: @escaping(_:URL)->()) {
         let settings = ImagesToVideoUtils.videoSettings(codec: AVVideoCodecType.jpeg.rawValue, width: (shots[0].cgImage?.width)!, height: (shots[0].cgImage?.height)!)
         let movieMaker = ImagesToVideoUtils(videoSettings: settings)
