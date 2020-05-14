@@ -12,7 +12,8 @@ struct ContentView: View {
             VStack {
                 if self.viewRouter.currentView == "home" {
                     //LogoView(width: geometry.size.width)
-                    SneakerListView()
+                    //SneakerListView()
+                    MyContentView()
                 } else if self.viewRouter.currentView == "profile" {
                     //LogoView(width: geometry.size.width)
                     Spacer()
