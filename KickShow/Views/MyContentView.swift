@@ -116,7 +116,7 @@ struct ImageViewWidget: View {
     var body: some View {
         Image(uiImage: (imageLoader.data.count == 0) ? UIImage(named: "spin")! : UIImage(data: imageLoader.data)!)
             .resizable()
-            .aspectRatio(1,contentMode: .fit)
+            .aspectRatio(3/4,contentMode: .fit)
             .cornerRadius(10)
     }
     
