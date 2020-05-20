@@ -19,7 +19,7 @@ struct ContentView: View {
                     CameraView(viewRouter: self.viewRouter)
                         .transition(.scale)
                 }
-                if self.viewRouter.currentView != "camera" {
+                if self.viewRouter.showToolBar {
                     BottomNAVBar(viewRouter: self.viewRouter, width: geometry.size.width, height: geometry.size.height)
                 }
             }
@@ -66,6 +66,7 @@ struct CircleButton: View {
                 .foregroundColor(.blue)
                 .onTapGesture {
                     self.viewRouter.currentView = self.title
+                    self.viewRouter.showToolBar = false //this is the camera
                 }
             }
         }
@@ -89,24 +90,20 @@ struct BottomNAVBar : View{
     var height:CGFloat
     var body: some View{
         VStack {
-            if self.viewRouter.showToolBar {
-                Spacer()
-                HStack {
-                    ToolbarButton(viewRouter: self.viewRouter, title: "home", icon: "house")
-                        .frame(width: self.width/3, height: 75)
-                    
-                    CircleButton(viewRouter: self.viewRouter, title: "camera", icon: "camera.circle.fill")
-                        .offset(y: -self.height/10/2)
-                    
-                    ToolbarButton(viewRouter: self.viewRouter, title: "profile", icon: "person.fill")
-                        .frame(width: self.width/3, height: 75)
-                    
-                }
-                .frame(width: self.width, height: self.height/10)
-                .background(Color.white.shadow(radius: 2))
-            } else {
-                //EmptyView()
+            Spacer()
+            HStack {
+                ToolbarButton(viewRouter: self.viewRouter, title: "home", icon: "house")
+                    .frame(width: self.width/3, height: 75)
+                
+                CircleButton(viewRouter: self.viewRouter, title: "camera", icon: "camera.circle.fill")
+                    .offset(y: -self.height/10/2)
+                
+                ToolbarButton(viewRouter: self.viewRouter, title: "profile", icon: "person.fill")
+                    .frame(width: self.width/3, height: 75)
+                
             }
+            .frame(width: self.width, height: self.height/10)
+            .background(Color.white.shadow(radius: 2))
         }
     }
 }
