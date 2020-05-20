@@ -11,17 +11,22 @@ import UIKit
 import AVFoundation
 
 struct MyPlayerView: View {
+    var viewRouter:ViewRouter
     var myVidUrl: String
     var body: some View {
         PlayerView(vidUrl: myVidUrl)
             .statusBar(hidden: true)
             .edgesIgnoringSafeArea(.all)
+            .onAppear(){
+                self.viewRouter.toggleView()
+            }
     }
 }
 
 struct MyPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPlayerView(myVidUrl: "https://tufarostorage.blob.core.windows.net/kickspins/display.mp4")
+        //MyPlayerView(myVidUrl: "https://tufarostorage.blob.core.windows.net/kickspins/display.mp4")
+        Text("Fix this")
     }
 }
 

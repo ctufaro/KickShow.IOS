@@ -11,6 +11,12 @@ import SwiftUI
 
 class ViewRouter: ObservableObject {
     
+    //@Published var showToolBar : Bool = false{
+        //didSet{
+            //print("Show toolbar?: \(showToolBar)")
+        //}
+    //}
+    
     let objectWillChange = PassthroughSubject<ViewRouter,Never>()
     
     var currentView: String = "home" {
@@ -19,5 +25,19 @@ class ViewRouter: ObservableObject {
                 objectWillChange.send(self)
             }
         }
+    }
+    
+    var showToolBar : Bool = true{
+        didSet{
+            withAnimation() {
+                objectWillChange.send(self)
+            }
+        }
+    }
+    
+    
+    
+    func toggleView(){
+        showToolBar = !showToolBar
     }
 }

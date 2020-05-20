@@ -12,6 +12,7 @@ struct Course: Decodable, Identifiable {
     let id: Int32
     let postTitle, postImage, userName, postMotion: String
 }
+
 class NetworkManager: ObservableObject {
     var didChange = PassthroughSubject<NetworkManager, Never>()
     
@@ -36,18 +37,23 @@ class NetworkManager: ObservableObject {
         }.resume()
     }
 }
+
 struct MyContentView : View {
     
     @ObservedObject var networkManager = NetworkManager()
+    @ObservedObject var viewRouter:ViewRouter
     
     var body: some View {
         NavigationView {
             List (networkManager.courses) { course in
-                NavigationLink(destination: MyPlayerView(myVidUrl: course.postMotion)){
+                NavigationLink(destination: MyPlayerView(viewRouter:self.viewRouter, myVidUrl: course.postMotion)){
                     CourseRowView(course: course)
                 }
                 
             }.navigationBarTitle(Text("Gallery"))
+                .onAppear(){
+                    self.viewRouter.showToolBar=true
+            }
         }
     }
 }
@@ -105,6 +111,7 @@ class ImageLoader: ObservableObject {
         }.resume()
     }
 }
+
 struct ImageViewWidget: View {
     
     @ObservedObject var imageLoader: ImageLoader
@@ -134,7 +141,8 @@ struct ImageViewWidget: View {
 #if DEBUG
 struct MyContentView_Previews : PreviewProvider {
     static var previews: some View {
-        MyContentView()
+        //MyContentView(viewRouter: <#T##ViewRouter#>())
+        Text("Fix this")
     }
 }
 #endif

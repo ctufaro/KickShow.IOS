@@ -9,13 +9,10 @@ struct ContentView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
+            ZStack {
                 if self.viewRouter.currentView == "home" {
-                    //LogoView(width: geometry.size.width)
-                    //SneakerListView()
-                    MyContentView()
+                    MyContentView(viewRouter: self.viewRouter)
                 } else if self.viewRouter.currentView == "profile" {
-                    //LogoView(width: geometry.size.width)
                     Spacer()
                     ProfileView()
                 } else if self.viewRouter.currentView == "camera" {
@@ -23,26 +20,10 @@ struct ContentView: View {
                         .transition(.scale)
                 }
                 if self.viewRouter.currentView != "camera" {
-                    Spacer()
-                    ZStack {
-                        HStack {
-                            ToolbarButton(viewRouter: self.viewRouter, title: "home", icon: "house")
-                                .frame(width: geometry.size.width/3, height: 75)
-                            
-                            CircleButton(viewRouter: self.viewRouter, title: "camera", icon: "camera.circle.fill")
-                                .offset(y: -geometry.size.height/10/2)
-                            
-                            ToolbarButton(viewRouter: self.viewRouter, title: "profile", icon: "person.fill")
-                                .frame(width: geometry.size.width/3, height: 75)
-                            
-                        }
-                        .frame(width: geometry.size.width, height: geometry.size.height/10)
-                        .background(Color.white.shadow(radius: 2))
-                    }                    
+                    BottomNAVBar(viewRouter: self.viewRouter, width: geometry.size.width, height: geometry.size.height)
                 }
             }
         }
-        //.edgesIgnoringSafeArea(.all)
         .statusBar(hidden: true)
     }
 }
@@ -90,7 +71,6 @@ struct CircleButton: View {
         }
     }
 
-
 struct LogoView: View {
     let width: CGFloat
     var body: some View{
@@ -99,6 +79,34 @@ struct LogoView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width:self.width/3)
+        }
+    }
+}
+
+struct BottomNAVBar : View{
+    @ObservedObject var viewRouter:ViewRouter
+    var width:CGFloat
+    var height:CGFloat
+    var body: some View{
+        VStack {
+            if self.viewRouter.showToolBar {
+                Spacer()
+                HStack {
+                    ToolbarButton(viewRouter: self.viewRouter, title: "home", icon: "house")
+                        .frame(width: self.width/3, height: 75)
+                    
+                    CircleButton(viewRouter: self.viewRouter, title: "camera", icon: "camera.circle.fill")
+                        .offset(y: -self.height/10/2)
+                    
+                    ToolbarButton(viewRouter: self.viewRouter, title: "profile", icon: "person.fill")
+                        .frame(width: self.width/3, height: 75)
+                    
+                }
+                .frame(width: self.width, height: self.height/10)
+                .background(Color.white.shadow(radius: 2))
+            } else {
+                //EmptyView()
+            }
         }
     }
 }
