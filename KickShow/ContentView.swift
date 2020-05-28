@@ -11,10 +11,22 @@ struct ContentView: View {
         GeometryReader { geometry in
             ZStack {
                 if self.viewRouter.currentView == "home" {
-                    MyContentView(viewRouter: self.viewRouter)
+                    ZStack {
+                        GalleryView(viewRouter: self.viewRouter)
+                        //VStack {
+                            //LogoView(width:geometry.size.width)
+                            //Spacer()
+                        //}
+                    }
                 } else if self.viewRouter.currentView == "profile" {
                     Spacer()
                     ProfileView()
+                } else if self.viewRouter.currentView == "hot" {
+                    Spacer()
+                    HotView()
+                } else if self.viewRouter.currentView == "market" {
+                    Spacer()
+                    MarketView()
                 } else if self.viewRouter.currentView == "camera" {
                     CameraView(viewRouter: self.viewRouter)
                         .transition(.scale)
@@ -25,6 +37,7 @@ struct ContentView: View {
             }
         }
         .statusBar(hidden: true)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -58,11 +71,11 @@ struct CircleButton: View {
         ZStack {
             Circle()
                 .foregroundColor(Color.white)
-                .frame(width: 75, height: 75)
+                .frame(width: 65, height: 65)
             Image(systemName: icon)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 75, height: 75)
+                .frame(width: 65, height: 65)
                 .foregroundColor(.blue)
                 .onTapGesture {
                     self.viewRouter.currentView = self.title
@@ -93,13 +106,19 @@ struct BottomNAVBar : View{
             Spacer()
             HStack {
                 ToolbarButton(viewRouter: self.viewRouter, title: "home", icon: "house")
-                    .frame(width: self.width/3, height: 75)
+                    .frame(width: self.width/5.5, height: 75)
+                
+                ToolbarButton(viewRouter: self.viewRouter, title: "profile", icon: "person.fill")
+                    .frame(width: self.width/5.5, height: 75)
                 
                 CircleButton(viewRouter: self.viewRouter, title: "camera", icon: "camera.circle.fill")
                     .offset(y: -self.height/10/2)
                 
-                ToolbarButton(viewRouter: self.viewRouter, title: "profile", icon: "person.fill")
-                    .frame(width: self.width/3, height: 75)
+                ToolbarButton(viewRouter: self.viewRouter, title: "hot", icon: "flame.fill")
+                    .frame(width: self.width/5.5, height: 75)
+                
+                ToolbarButton(viewRouter: self.viewRouter, title: "market", icon: "dollarsign.circle")
+                    .frame(width: self.width/5.5, height: 75)
                 
             }
             .frame(width: self.width, height: self.height/10)

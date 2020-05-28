@@ -11,22 +11,54 @@ import UIKit
 import AVFoundation
 
 struct MyPlayerView: View {
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var viewRouter:ViewRouter
     var myVidUrl: String
     var body: some View {
-        PlayerView(vidUrl: myVidUrl)
-            .statusBar(hidden: true)
-            .edgesIgnoringSafeArea(.all)
-            .onAppear(){
-                self.viewRouter.toggleView()
+        ZStack {
+            PlayerView(vidUrl: myVidUrl)
+                .statusBar(hidden: true)
+                .edgesIgnoringSafeArea(.all)
+                .onAppear(){
+                    self.viewRouter.toggleView()
             }
+            HStack {
+                Spacer()
+                VStack {
+                    Image(systemName: "heart.circle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 55, height: 55)
+                        .foregroundColor(.white)
+                        .padding()
+                    Image(systemName: "hand.thumbsup")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 55, height: 55)
+                        .foregroundColor(.white)
+                        .padding()
+                    Spacer()
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: Button(action : {
+            self.mode.wrappedValue.dismiss()
+        }){
+            Image(systemName: "arrowshape.turn.up.left.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 35, height: 35)
+            .foregroundColor(.white)
+            
+        })
     }
 }
 
 struct MyPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        //MyPlayerView(myVidUrl: "https://tufarostorage.blob.core.windows.net/kickspins/display.mp4")
-        Text("Fix this")
+        MyPlayerView(viewRouter:ViewRouter(), myVidUrl: "https://tufarostorage.blob.core.windows.net/kickspins/display.mp4")
+        //Text("Fix this")
     }
 }
 

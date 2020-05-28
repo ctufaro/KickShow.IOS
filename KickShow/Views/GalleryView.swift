@@ -38,7 +38,7 @@ class NetworkManager: ObservableObject {
     }
 }
 
-struct MyContentView : View {
+struct GalleryView : View {
     
     @ObservedObject var networkManager = NetworkManager()
     @ObservedObject var viewRouter:ViewRouter
@@ -50,7 +50,10 @@ struct MyContentView : View {
                     CourseRowView(course: course)
                 }
                 
-            }.navigationBarTitle(Text("Gallery"))
+            }
+            .navigationBarHidden(true)
+            .navigationBarTitle("")
+            //.navigationBarTitle("Gallery", displayMode: .inline)
                 .onAppear(){
                     self.viewRouter.showToolBar=true
             }
@@ -139,7 +142,7 @@ struct ImageViewWidget: View {
 }
 
 #if DEBUG
-struct MyContentView_Previews : PreviewProvider {
+struct GalleryView_Previews : PreviewProvider {
     static var previews: some View {
         //MyContentView(viewRouter: <#T##ViewRouter#>())
         Text("Fix this")

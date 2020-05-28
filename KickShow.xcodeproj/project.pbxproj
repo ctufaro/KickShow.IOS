@@ -46,7 +46,9 @@
 		13E74DF024171BDE00C68E58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13E74DEE24171BDE00C68E58 /* LaunchScreen.storyboard */; };
 		13EBAC13246648DA00CD9CA9 /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBAC12246648DA00CD9CA9 /* UserPost.swift */; };
 		13EBAC1524664AC900CD9CA9 /* UserPostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBAC1424664AC900CD9CA9 /* UserPostList.swift */; };
-		13EBAC1B24664E9900CD9CA9 /* MyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBAC1A24664E9900CD9CA9 /* MyContentView.swift */; };
+		13EBAC1B24664E9900CD9CA9 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBAC1A24664E9900CD9CA9 /* GalleryView.swift */; };
+		D90BBD5E2480289C0008AD59 /* HotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90BBD5D2480289C0008AD59 /* HotView.swift */; };
+		D90BBD60248028D00008AD59 /* MarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90BBD5F248028D00008AD59 /* MarketView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,7 +91,9 @@
 		13E74DF124171BDE00C68E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13EBAC12246648DA00CD9CA9 /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
 		13EBAC1424664AC900CD9CA9 /* UserPostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostList.swift; sourceTree = "<group>"; };
-		13EBAC1A24664E9900CD9CA9 /* MyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentView.swift; sourceTree = "<group>"; };
+		13EBAC1A24664E9900CD9CA9 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		D90BBD5D2480289C0008AD59 /* HotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotView.swift; sourceTree = "<group>"; };
+		D90BBD5F248028D00008AD59 /* MarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,9 +168,11 @@
 				13CBE2832438CD1200816F58 /* CALayerView.swift */,
 				13CBE27D2431425800816F58 /* CameraView.swift */,
 				13E74DE724171BDC00C68E58 /* ContentView.swift */,
+				D90BBD5D2480289C0008AD59 /* HotView.swift */,
 				13776F652447EA3600CFD389 /* ImagesToVideoUtils.swift */,
 				13E74DF124171BDE00C68E58 /* Info.plist */,
 				13E74DEE24171BDE00C68E58 /* LaunchScreen.storyboard */,
+				D90BBD5F248028D00008AD59 /* MarketView.swift */,
 				13CBE26D242D944F00816F58 /* ProfileView.swift */,
 				13776F6E244FC9AA00CFD389 /* RestAPI.swift */,
 				13E74DE524171BDC00C68E58 /* SceneDelegate.swift */,
@@ -193,7 +199,7 @@
 		13EBAC1924664E7200CD9CA9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				13EBAC1A24664E9900CD9CA9 /* MyContentView.swift */,
+				13EBAC1A24664E9900CD9CA9 /* GalleryView.swift */,
 				1375399D246CD95200A96CA7 /* MyPlayerView.swift */,
 			);
 			path = Views;
@@ -292,7 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13EBAC1B24664E9900CD9CA9 /* MyContentView.swift in Sources */,
+				13EBAC1B24664E9900CD9CA9 /* GalleryView.swift in Sources */,
 				13CBE2802438CC9C00816F58 /* AVFoundationVM.swift in Sources */,
 				13CBE2612427962100816F58 /* ViewRouter.swift in Sources */,
 				13E602602419C5130046505C /* SneakerListView.swift in Sources */,
@@ -301,7 +307,9 @@
 				13CBE27E2431425800816F58 /* CameraView.swift in Sources */,
 				13E6025C2419B1CD0046505C /* Sneaker.swift in Sources */,
 				13CBE26E242D944F00816F58 /* ProfileView.swift in Sources */,
+				D90BBD60248028D00008AD59 /* MarketView.swift in Sources */,
 				1375399E246CD95200A96CA7 /* MyPlayerView.swift in Sources */,
+				D90BBD5E2480289C0008AD59 /* HotView.swift in Sources */,
 				13CBE2842438CD1200816F58 /* CALayerView.swift in Sources */,
 				13E602622419C6540046505C /* SneakerDetail.swift in Sources */,
 				13E74DE424171BDC00C68E58 /* AppDelegate.swift in Sources */,

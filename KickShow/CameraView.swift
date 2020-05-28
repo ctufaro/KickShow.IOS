@@ -90,7 +90,7 @@ struct CameraControls: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding(10)
-                .frame(width: 50, height: 50)
+                .frame(width: 55, height: 55)
                 .onTapGesture {
                     self.goHome()
                 }
@@ -127,7 +127,8 @@ struct CameraControls: View {
                         self.showPreview = true
                     }
                 }) {
-                    Image("spin")
+                    //Image("spin")
+                    Image(systemName: "arrow.clockwise.circle")
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
