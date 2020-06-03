@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
         
     @ObservedObject var viewRouter = ViewRouter()
     
@@ -13,10 +13,10 @@ struct ContentView: View {
                 if self.viewRouter.currentView == "home" {
                     ZStack {
                         GalleryView(viewRouter: self.viewRouter)
-                        //VStack {
-                            //LogoView(width:geometry.size.width)
-                            //Spacer()
-                        //}
+                        VStack {
+                            LogoView(width:geometry.size.width)
+                            Spacer()
+                        }
                     }
                 } else if self.viewRouter.currentView == "profile" {
                     Spacer()
@@ -36,14 +36,14 @@ struct ContentView: View {
                 }
             }
         }
-        .statusBar(hidden: true)
+        //.statusBar(hidden: true)
         .edgesIgnoringSafeArea(.bottom)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView()
     }
 }
 

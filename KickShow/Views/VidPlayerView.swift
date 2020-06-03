@@ -10,8 +10,9 @@ import SwiftUI
 import UIKit
 import AVFoundation
 
-struct MyPlayerView: View {
+struct VidPlayerView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State private var showingSheet = true
     var viewRouter:ViewRouter
     var myVidUrl: String
     var body: some View {
@@ -25,19 +26,13 @@ struct MyPlayerView: View {
             HStack {
                 Spacer()
                 VStack {
+                    Spacer()
                     Image(systemName: "heart.circle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 55, height: 55)
                         .foregroundColor(.white)
                         .padding()
-                    Image(systemName: "hand.thumbsup")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 55, height: 55)
-                        .foregroundColor(.white)
-                        .padding()
-                    Spacer()
                 }
             }
         }
@@ -45,11 +40,11 @@ struct MyPlayerView: View {
         .navigationBarItems(leading: Button(action : {
             self.mode.wrappedValue.dismiss()
         }){
-            Image(systemName: "arrowshape.turn.up.left.fill")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 35, height: 35)
-            .foregroundColor(.white)
+            Image(systemName: "chevron.left")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 25, height: 25)
+                .foregroundColor(.black)
             
         })
     }
@@ -57,7 +52,7 @@ struct MyPlayerView: View {
 
 struct MyPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPlayerView(viewRouter:ViewRouter(), myVidUrl: "https://tufarostorage.blob.core.windows.net/kickspins/display.mp4")
+        VidPlayerView(viewRouter:ViewRouter(), myVidUrl: "https://tufarostorage.blob.core.windows.net/kickspins/display.mp4")
         //Text("Fix this")
     }
 }

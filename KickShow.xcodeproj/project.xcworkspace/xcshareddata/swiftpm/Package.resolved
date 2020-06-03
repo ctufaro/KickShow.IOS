@@ -11,12 +11,30 @@
         }
       },
       {
+        "package": "FloatingLabelTextFieldSwiftUI",
+        "repositoryURL": "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI.git",
+        "state": {
+          "branch": null,
+          "revision": "a7a86a91a819a2b6d6cdaf7646b502a14407dae8",
+          "version": "3.2.0"
+        }
+      },
+      {
         "package": "SPAlert",
         "repositoryURL": "https://github.com/ivanvorobei/SPAlert",
         "state": {
           "branch": "master",
           "revision": "18862409586ac547bcdf8957cd96beb872fbc729",
           "version": null
+        }
+      },
+      {
+        "package": "WaterfallGrid",
+        "repositoryURL": "https://github.com/paololeonardi/WaterfallGrid.git",
+        "state": {
+          "branch": null,
+          "revision": "67bb0263a45357651608faafcd51fe39cfd3cf30",
+          "version": "0.4.0"
         }
       }
     ]

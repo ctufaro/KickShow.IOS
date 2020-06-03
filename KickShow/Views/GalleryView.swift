@@ -46,15 +46,12 @@ struct GalleryView : View {
     var body: some View {
         NavigationView {
             List (networkManager.courses) { course in
-                NavigationLink(destination: MyPlayerView(viewRouter:self.viewRouter, myVidUrl: course.postMotion)){
+                NavigationLink(destination: VidPlayerView(viewRouter:self.viewRouter, myVidUrl: course.postMotion)){
                     CourseRowView(course: course)
                 }
                 
             }
-            .navigationBarHidden(true)
-            .navigationBarTitle("")
-            //.navigationBarTitle("Gallery", displayMode: .inline)
-                .onAppear(){
+            .onAppear(){
                     self.viewRouter.showToolBar=true
             }
         }
