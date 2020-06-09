@@ -12,6 +12,7 @@ import FloatingLabelTextFieldSwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @EnvironmentObject var authSettings: AuthSettings
     
     var body: some View {
         GeometryReader{ geometry in
@@ -35,7 +36,9 @@ struct LoginView: View {
                     
                     TextBoxView(email:self.$password, width: geometry.size.width, placeTxt: "Password", isSecure: true)
                     
-                    Button(action: {}) {
+                    Button(action: {
+                        self.authSettings.loggedIn = true
+                    }) {
                         Text("Sign In")
                             .padding()
                             .foregroundColor(Color.white)

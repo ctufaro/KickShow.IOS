@@ -42,6 +42,7 @@ struct GalleryView : View {
     
     @ObservedObject var networkManager = NetworkManager()
     @ObservedObject var viewRouter:ViewRouter
+    @EnvironmentObject var authSettings: AuthSettings
     
     var body: some View {
         NavigationView {
@@ -49,11 +50,20 @@ struct GalleryView : View {
                 NavigationLink(destination: VidPlayerView(viewRouter:self.viewRouter, myVidUrl: course.postMotion)){
                     CourseRowView(course: course)
                 }
-                
             }
             .onAppear(){
                     self.viewRouter.showToolBar=true
             }
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.authSettings.loggedIn = false
+                }) {
+                    Image(systemName: "power")
+                        .font(.body)
+                        .foregroundColor(.black)
+                        
+                }
+            )
         }
     }
 }

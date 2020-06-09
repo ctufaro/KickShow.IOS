@@ -51,6 +51,7 @@
 		D965447C248743E60078DF56 /* FloatingLabelTextFieldSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D965447B248743E60078DF56 /* FloatingLabelTextFieldSwiftUI */; };
 		D965447E2487B8470078DF56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965447D2487B8470078DF56 /* ContentView.swift */; };
 		D9895B0A248351B4007B99A1 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = D9895B09248351B4007B99A1 /* WaterfallGrid */; };
+		D9B14F352487EB2E007C8462 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B14F342487EB2E007C8462 /* AuthSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		D90BBD5F248028D00008AD59 /* MarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketView.swift; sourceTree = "<group>"; };
 		D9654478248729D70078DF56 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D965447D2487B8470078DF56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D9B14F342487EB2E007C8462 /* AuthSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				13E6025B2419B1CD0046505C /* Sneaker.swift */,
 				13EBAC12246648DA00CD9CA9 /* UserPost.swift */,
 				13EBAC1424664AC900CD9CA9 /* UserPostList.swift */,
+				D9B14F342487EB2E007C8462 /* AuthSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9B14F352487EB2E007C8462 /* AuthSettings.swift in Sources */,
 				13EBAC1B24664E9900CD9CA9 /* GalleryView.swift in Sources */,
 				13CBE2802438CC9C00816F58 /* AVFoundationVM.swift in Sources */,
 				13CBE2612427962100816F58 /* ViewRouter.swift in Sources */,

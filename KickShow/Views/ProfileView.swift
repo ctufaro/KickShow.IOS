@@ -16,7 +16,8 @@ struct ProfileView: View {
                 ZStack {
                     Image("white-background")
                         .resizable()
-                        .frame(width: geometry.size.width, height: geometry.size.height/2.2)
+                        .frame(width: geometry.size.width, height: geometry.size.height/2.3)
+                    
                     VStack {
                         VStack {
                             Image("avatar-chris")

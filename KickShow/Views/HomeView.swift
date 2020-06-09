@@ -37,7 +37,7 @@ struct HomeView: View {
             }
         }
         //.statusBar(hidden: true)
-        .edgesIgnoringSafeArea(.bottom)
+        //.edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -123,6 +123,6 @@ struct BottomNAVBar : View{
             }
             .frame(width: self.width, height: self.height/10)
             .background(Color.white.shadow(radius: 2))
-        }
+        }.edgesIgnoringSafeArea(.all)
     }
 }

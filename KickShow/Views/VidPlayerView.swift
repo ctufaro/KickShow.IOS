@@ -18,7 +18,7 @@ struct VidPlayerView: View {
     var body: some View {
         ZStack {
             PlayerView(vidUrl: myVidUrl)
-                .statusBar(hidden: true)
+                //.statusBar(hidden: true)
                 .edgesIgnoringSafeArea(.all)
                 .onAppear(){
                     self.viewRouter.toggleView()
@@ -45,7 +45,7 @@ struct VidPlayerView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 25, height: 25)
                 .foregroundColor(.black)
-            
+                .offset(y:-6)
         })
     }
 }

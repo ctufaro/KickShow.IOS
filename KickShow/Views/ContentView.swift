@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    var isLoggedIn:Bool = false
+    @EnvironmentObject var authSettings: AuthSettings
     var body: some View {
-        if(isLoggedIn){
+        if(authSettings.loggedIn){
             return AnyView(HomeView())
         } else {
             return AnyView(LoginView())
