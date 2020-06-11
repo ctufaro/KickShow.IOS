@@ -25,7 +25,7 @@ struct SneakerRotateView: View {
         GeometryReader { reader in
             ZStack {
                 ImageAnimated(imageSize: CGSize(width: reader.size.width, height: reader.size.height+20), images: self.shots, duration: self.$duration)
-                //.frame(width: reader.size.width, height: reader.size.height)
+                    //.frame(width: reader.size.width, height: reader.size.height)
                     .edgesIgnoringSafeArea(.top)
                 Controls(showPreview: self.$showPreview, duration: self.$duration, close: self.close, save:{self.saveAsVideo()})
             }.onAppear{
@@ -56,7 +56,7 @@ struct SneakerRotateView: View {
         }
         return nil
     }
-
+    
     func generateVideoUrl(complete: @escaping(_:URL)->()) {
         let settings = ImagesToVideoUtils.videoSettings(codec: AVVideoCodecType.jpeg.rawValue, width: (shots[0].cgImage?.width)!, height: (shots[0].cgImage?.height)!)
         let movieMaker = ImagesToVideoUtils(videoSettings: settings)
@@ -66,7 +66,7 @@ struct SneakerRotateView: View {
             complete(fileURL)
         }
     }
-
+    
     func saveVideo(url: URL, complete:@escaping(_:Bool)->()) {
         let library = PHPhotoLibrary.shared()
         library.performChanges({
@@ -86,12 +86,18 @@ struct SneakerRotateView: View {
 struct SneakerRotateView_Previews: PreviewProvider {
     @State static var value = false
     @State static var duration = 0.0
+    @State static var logoImage: [UIImage] = [
+        UIImage(named: "avatar-chris")!,
+        UIImage(named: "avatar-chris-purple")!
+    ]
+    
     static var previews: some View {
-        Group {
-            Controls(showPreview: $value, duration: $duration, close: {}, save:{print("saved")}).previewDevice("iPhone 11")
-            //Controls(showPreview: $value, duration: $duration, close: {}).previewDevice("iPhone 7")
-            //Controls(showPreview: $value, duration: $duration, close: {}).previewDevice("iPhone SE")
-        }
+        SneakerRotateView(shots:logoImage,showPreview: $value, close: {})
+        //Group {
+        //Controls(showPreview: $value, duration: $duration, close: {}, save:{print("saved")}).previewDevice("iPhone 11")
+        //Controls(showPreview: $value, duration: $duration, close: {}).previewDevice("iPhone 7")
+        //Controls(showPreview: $value, duration: $duration, close: {}).previewDevice("iPhone SE")
+        //}
     }
 }
 
@@ -102,9 +108,9 @@ struct ImageAnimated: UIViewRepresentable {
     
     func makeUIView(context: Self.Context) -> UIImageView {
         //let containerView = UIView(frame: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
-
+        
         let animationImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
-
+        
         animationImageView.clipsToBounds = true
         animationImageView.autoresizesSubviews = true
         animationImageView.contentMode = UIView.ContentMode.scaleAspectFill
@@ -113,12 +119,12 @@ struct ImageAnimated: UIViewRepresentable {
         //containerView.addSubview(animationImageView)
         return animationImageView
     }
-
+    
     func updateUIView(_ uiView: UIImageView, context: UIViewRepresentableContext<ImageAnimated>) {
         uiView.image = UIImage.animatedImage(with: images, duration: duration)
         //print("Duration: \(duration)")
     }
-
+    
 }
 
 struct Controls: View {
@@ -129,7 +135,7 @@ struct Controls: View {
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "trash")
+                Image(systemName: "chevron.left")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(10)
@@ -145,15 +151,52 @@ struct Controls: View {
                     self.showPreview = false
                     self.close()
                 }) {
-                    Image(systemName: "icloud.and.arrow.up")
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 55)
+                    Text("Post")
+                        .padding(10)
+                        .frame(width: 80)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .font(.body)
                 }.padding()
             }
             Spacer()
-            Slider(value: $duration, in:0.1...1, step: 0.1).padding()
+            HStack(alignment:.bottom) {
+                Slider(value: $duration, in:0.1...1, step: 0.1).padding()
+                VStack {
+                    Button(action: {
+                    }) {
+                        Text("Text")
+                            .padding(10)
+                            //.fixedSize()
+                            .frame(width: 80)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.callout)
+                    }.padding()
+                    
+                    Button(action: {
+                    }) {
+                        Text("Filters")
+                            .padding(10)
+                            //.fixedSize()
+                            .frame(width: 80)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.callout)
+                    }.padding()
+                    
+                    Button(action: {
+                    }) {
+                        Text("Stickers")
+                            .padding(10)
+                            //.fixedSize()
+                            .frame(width: 80)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.callout)
+                    }.padding()
+                }
+            }
         }
     }
 }

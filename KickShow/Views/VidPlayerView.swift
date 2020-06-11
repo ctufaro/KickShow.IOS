@@ -45,7 +45,7 @@ struct VidPlayerView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 25, height: 25)
                 .foregroundColor(.black)
-                .offset(y:-6)
+                //.offset(y:-6)
         })
     }
 }

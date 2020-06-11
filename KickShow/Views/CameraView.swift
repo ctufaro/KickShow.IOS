@@ -94,6 +94,15 @@ struct CameraControls: View {
                 .onTapGesture {
                     self.goHome()
                 }
+                ZStack {
+                    Text("Snap each frame with the button below")
+                        .font(.callout)
+                        .padding(8)
+                        .foregroundColor(.white)
+                }.background(Color.black)
+                .opacity(0.5)
+                //.cornerRadius(10.0)
+                //.padding(6)
                 Spacer()
             }
             Spacer()
@@ -112,7 +121,6 @@ struct CameraControls: View {
                 }
                 Spacer()
                 Button(action: {
-                    
                     self.avFoundationVM.takePhoto()
                     self.count+=1
                 }) {
@@ -128,12 +136,13 @@ struct CameraControls: View {
                     }
                 }) {
                     //Image("spin")
-                    Image(systemName: "arrow.clockwise.circle")
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 70)
-                }
+                    Text("Create")
+                    .padding(10)
+                    .frame(width: 80)
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .font(.body)
+                }.opacity(self.count > 0 ? 1:0)
             }.padding(10)
         }.padding(.bottom, 10.0)
     }
