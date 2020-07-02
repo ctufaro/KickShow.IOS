@@ -15,7 +15,11 @@ struct TemplateView: View {
 }
 
 struct TemplateView_Previews: PreviewProvider {
+    @State static var text = ""
+    @State static var fontName = "Courier"
+    @State static var fontSize = CGFloat(100.0)
     static var previews: some View {
-        TemplateView()
+        TextView(text:$text,fontName:$fontName,fontSize: $fontSize)
+        .edgesIgnoringSafeArea(.top)
     }
 }

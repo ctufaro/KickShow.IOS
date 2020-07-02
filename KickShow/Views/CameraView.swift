@@ -1,6 +1,5 @@
 //
 //  AVCameraView.swift
-//  KickShow
 //
 //  Created by Christopher Tufaro on 3/28/20.
 //  Copyright © 2020 Personal. All rights reserved.
@@ -28,7 +27,7 @@ struct CameraView: View {
                         
                         CameraControls(goHome:{self.viewRouter.currentView = "home"}, avFoundationVM: self.avFoundationVM, showPreview: self.$showPreview, count: self.$count)
                     } else {
-                        SneakerRotateView(shots:self.avFoundationVM.shots, showPreview:self.$showPreview, close:{
+                        ShowPreviewView(shots:self.avFoundationVM.shots, showPreview:self.$showPreview, close:{
                             self.avFoundationVM.shots = []
                             self.count = 0
                             self.avFoundationVM.image = nil
@@ -136,7 +135,7 @@ struct CameraControls: View {
                     }
                 }) {
                     //Image("spin")
-                    Text("Create")
+                    Text("Stitch")
                     .padding(10)
                     .frame(width: 80)
                     .background(Color.red)

@@ -1,6 +1,4 @@
 //
-//  SneakerRotateView.swift
-//  KickShow
 //
 //  Created by Christopher Tufaro on 4/9/20.
 //  Copyright © 2020 Personal. All rights reserved.
@@ -14,10 +12,15 @@ import Photos
 import ImageIO
 import MobileCoreServices
 
-struct SneakerRotateView: View {
+struct ShowPreviewView: View {
     var shots: Array<UIImage>!
     @Binding var showPreview: Bool
     @State var duration = 0.5
+    @State var text: String = ""
+    @State var fontName: String = "Courier"
+    @State var fontSize: CGFloat = 75.0
+    @State var currentView: String = "controls"
+    
     let close: () -> Void
     private let fpsToSkip : Int = 4
     
@@ -25,11 +28,28 @@ struct SneakerRotateView: View {
         GeometryReader { reader in
             ZStack {
                 ImageAnimated(imageSize: CGSize(width: reader.size.width, height: reader.size.height+20), images: self.shots, duration: self.$duration)
-                    //.frame(width: reader.size.width, height: reader.size.height)
                     .edgesIgnoringSafeArea(.top)
-                Controls(showPreview: self.$showPreview, duration: self.$duration, close: self.close, save:{self.saveAsVideo()})
+                
+                // FIRST VIEW: CONTROLS AND EDITED TEXT
+                if self.currentView == "controls"{
+                    ZStack {
+                        Controls(showPreview: self.$showPreview, currentView: self.$currentView, duration: self.$duration, close: self.close, save:{self.saveAsVideo()})
+                        UserTextView(text: self.$text, fontName: self.$fontName, fontSize: self.$fontSize)
+                    }
+                // SECOND VIEW: EDITING TEXT
+                } else if self.currentView == "text"{
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button("Done"){
+                              self.currentView = "controls"
+                            }
+                        }.padding()
+                        TextView(text: self.$text, fontName: self.$fontName, fontSize: self.$fontSize)
+                    }
+                }
             }.onAppear{
-                print("Sneaker Rotate View")
+                print("Show Preview View")
                 print(self.shots.count)
             }
         }
@@ -92,7 +112,7 @@ struct SneakerRotateView_Previews: PreviewProvider {
     ]
     
     static var previews: some View {
-        SneakerRotateView(shots:logoImage,showPreview: $value, close: {})
+        ShowPreviewView(shots:logoImage,showPreview: $value, close: {})
         //Group {
         //Controls(showPreview: $value, duration: $duration, close: {}, save:{print("saved")}).previewDevice("iPhone 11")
         //Controls(showPreview: $value, duration: $duration, close: {}).previewDevice("iPhone 7")
@@ -129,6 +149,7 @@ struct ImageAnimated: UIViewRepresentable {
 
 struct Controls: View {
     @Binding var showPreview: Bool
+    @Binding var currentView: String
     @Binding var duration: Double
     let close: () -> Void
     let save: () -> Void
@@ -164,6 +185,7 @@ struct Controls: View {
                 Slider(value: $duration, in:0.1...1, step: 0.1).padding()
                 VStack {
                     Button(action: {
+                        self.currentView = "text"
                     }) {
                         Text("Text")
                             .padding(10)
